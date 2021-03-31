@@ -23,7 +23,7 @@ public class JDBCExecutor
                 System.out.println(resultSet.getInt(1));
             }*/
 
-            //This tests that we can add data to the db
+            //This tests CREATE method we set
 
            /* Customer customer = new Customer();
             customer.setFirstName("George");
@@ -37,18 +37,40 @@ public class JDBCExecutor
 
             customerDAO.create(customer); */
 
-            //This tests the Reading methods we set
+            //This tests the READ method we set
           /*  Customer customer = customerDAO.findById(1000);
             System.out.println(customer.getFirstName() + " " + customer.getLastName()); */
 
             //This tests the UPDATE method we set
-            Customer customer = customerDAO.findById(10000);
+           /* Customer customer = customerDAO.findById(10000);
             System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
 
             customer.setEmail("gwashington@wh.gov");
             customer = customerDAO.update(customer);
 
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
+            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail()); */
+
+            //This tests the DELETE method we set
+            Customer customer = new Customer();
+            customer.setFirstName("John");
+            customer.setLastName("Adams");
+            customer.setEmail("george.washington@wh.gov");
+            customer.setPhone("(555) 555-5556");
+            customer.setAddress("1234 Main St");
+            customer.setCity("Mount Vernon");
+            customer.setState("VA");
+            customer.setZipCode("221521");
+
+            Customer dbCustomer = customerDAO.create(customer);
+            System.out.println(dbCustomer);
+            dbCustomer = customerDAO.findById(dbCustomer.getId());
+            System.out.println(dbCustomer);
+
+            dbCustomer.setEmail("john.adams@wh.gov");
+            dbCustomer = customerDAO.update(dbCustomer);
+            System.out.println(dbCustomer);
+
+            customerDAO.delete(dbCustomer.getId());
         }
         catch (SQLException e)
         {
