@@ -38,8 +38,17 @@ public class JDBCExecutor
             customerDAO.create(customer); */
 
             //This tests the Reading methods we set
-            Customer customer = customerDAO.findById(1000);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName());
+          /*  Customer customer = customerDAO.findById(1000);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName()); */
+
+            //This tests the UPDATE method we set
+            Customer customer = customerDAO.findById(10000);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
+
+            customer.setEmail("gwashington@wh.gov");
+            customer = customerDAO.update(customer);
+
+            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
         }
         catch (SQLException e)
         {
