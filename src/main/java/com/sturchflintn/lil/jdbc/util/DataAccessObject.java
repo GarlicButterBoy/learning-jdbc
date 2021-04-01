@@ -25,6 +25,11 @@ public abstract class DataAccessObject <T extends DataTransferObject>
     public abstract T create (T dto);
     public abstract void delete(long id);
 
+    /**
+     * returns the last value from a fetch result
+     * @param sequence
+     * @return
+     */
     protected int getLastVal(String sequence)
     {
         int key = 0;

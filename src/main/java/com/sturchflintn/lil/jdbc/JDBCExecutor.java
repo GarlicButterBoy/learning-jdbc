@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class JDBCExecutor
 {
@@ -15,6 +16,8 @@ public class JDBCExecutor
         {
             Connection connection = dcm.getConnection();
             CustomerDAO customerDAO = new CustomerDAO(connection);
+            OrderDAO orderDAO = new OrderDAO(connection);
+
             //This tests that the connection is working
             /*Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM customer");
@@ -24,7 +27,6 @@ public class JDBCExecutor
             }*/
 
             //This tests CREATE method we set
-
            /* Customer customer = new Customer();
             customer.setFirstName("George");
             customer.setLastName("Washington");
@@ -51,7 +53,7 @@ public class JDBCExecutor
             System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail()); */
 
             //This tests the DELETE method we set
-            Customer customer = new Customer();
+         /*   Customer customer = new Customer();
             customer.setFirstName("John");
             customer.setLastName("Adams");
             customer.setEmail("george.washington@wh.gov");
@@ -70,7 +72,28 @@ public class JDBCExecutor
             dbCustomer = customerDAO.update(dbCustomer);
             System.out.println(dbCustomer);
 
-            customerDAO.delete(dbCustomer.getId());
+            customerDAO.delete(dbCustomer.getId()); */
+
+            //This tests the OrderDOA RETRIEVE
+           /* Order order = orderDAO.findById(1000);
+            System.out.println(order); */
+
+            //This tests the OrderLines return method we added
+           /* List<Order> orders = orderDAO.getOrdersForCustomer(789);
+            orders.forEach(System.out::println); */
+
+            //This tests the findAllSorted method for customers
+            customerDAO.findAllSorted(20).forEach(System.out::println);
+
+            //This tests the findAllPaged method for customers
+            System.out.println("Paged:");
+            for (int i = 1; i <3; i++)
+            {
+                System.out.println("Page Number: " + i);
+                customerDAO.findAllPaged(10, i).forEach(System.out::println);
+            }
+
+
         }
         catch (SQLException e)
         {
